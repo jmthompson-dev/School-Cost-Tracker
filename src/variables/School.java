@@ -1,5 +1,7 @@
 package variables;
 
+import java.text.DecimalFormat;
+
 public class School {
 
     private int classroomCount = 10;
@@ -15,12 +17,12 @@ public class School {
         System.out.println("Students per classroom: " + studentsPerClassroom());
         System.out.println("Cost per student: " + costPerStudent());
         System.out.println("Cost per classroom: " + costPerClassroom());
+        System.out.println("Cost is within budget: " + isWithinBudget());
     }
 
     private double roundToNearestCent(double num) {
-        num*=100;
-        int result = (int)num;
-        return (double)result / 100;
+        DecimalFormat round = new DecimalFormat("###.##");
+        return Double.parseDouble(round.format(num));
     }
 
     private boolean isWithinBudget() {
@@ -28,16 +30,19 @@ public class School {
     }
 
     private double costPerStudent() {
-        return (totalExpenditure - (averageTeacherSalary * teacherCount)) / studentCount;
+        double cost = (totalExpenditure - (averageTeacherSalary * teacherCount)) / studentCount;
+        return roundToNearestCent(cost);
     }
 
     private int studentsPerClassroom() {
-        double result = (double)studentCount / (double) classroomCount;
-        return (int)Math.round(result);
+        double equation = (double)studentCount / classroomCount;
+        Long rounded = Math.round(equation);
+        return rounded.intValue();
     }
 
     private double costPerClassroom() {
-        return costPerStudent() * studentsPerClassroom();
+        double cost = costPerStudent() * studentsPerClassroom();
+        return roundToNearestCent(cost);
     }
 
 }

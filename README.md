@@ -137,6 +137,6 @@ Output to the console:
 
 ```
 Students per classroom: 9
-Cost per student: 2636.33
-Cost per classroom: 23727.02
+Cost per student: 2636.29
+Cost per classroom: 23727.61
 ```
